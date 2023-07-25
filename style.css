@@ -10,14 +10,14 @@
 </head>
 
 <body>
-  <form id="CommentForm">
+
     <input type="text" id="comment-box" placeholder="Enter comment">
-    <button type="submit">Post</button>
-    <p id="comments">
-    </form>
+    <button id="post">Post</button>
+    <ul id="unordered">
+
     </ul>
 
-    <script src="comments.js"></script>
+    <script src="code.js"></script>
 </body>
 
 </html>
