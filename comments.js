@@ -17,8 +17,7 @@ SaveDataToIndexedDB(comment1);
 });
 
 function SaveDataToIndexedDB(Comments)
-{   
-    const Post = {comment : Comments};
+{   const Post = {comment : Comments};
     const request = window.indexedDB.open('PostDB',1);
     request.onerror = (event)=>
     {console.error('Sorry. Error Creating IndexedDB Database');};
@@ -29,12 +28,39 @@ function SaveDataToIndexedDB(Comments)
         const addUserRequest = objectstore.add(Post);
         addUserRequest.onsuccess = ()=>
         {
-            document.getElementById("comments").innerHTML=`${Post.comment} <br>`
+            document.getElementById("comments").innerHTML=`${Post.comment}`
     };
         transaction.onsuccess = ()=>{db.close();};
     };
     request.onupgradeneeded=(event)=>
     {   const db = event.target.result;
-        db.createObjectStore('Posts',{keyPath:'comment'});
+        db.createObjectStore('Posts',{keyPath:'comments'});
     };
 }
+
+// function CheckDataInIndexedDB(Comment1)
+// {   const request = window.indexedDB.open('UserDB',1);
+//     request.onerror = (event)=>{console.error('Error while Reading!');};
+//     request.onsuccess = (event)=>
+//     {   const db = event.target.result;
+//         const transaction = db.transaction(['Users'],'readonly');
+//         const objectstore = transaction.objectStore('Users');
+//         const getUserRequest = objectstore.get(UserName);
+//         getUserRequest.onsuccess = () =>
+//         {   const User = getUserRequest.result;
+//             if(User && User.password === Password)
+//             {
+//                 // console.log('Login Successful!');
+//                 window.location.href = "home.html"
+//             }
+//             else {
+//                 document.getElementById("note").innerHTML=`Username or Password Incorrect`
+//             }
+//         };
+//         transaction.oncomplete= ()=>{db.close();};
+//     };
+//     request.onupgradeneeded=(event)=>
+//     {   const db=event.target.result;
+//         db.createObjectStore('Users',{keyPath:'UserName'});
+//     };
+// }
